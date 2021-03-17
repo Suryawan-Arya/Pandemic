@@ -21,6 +21,7 @@ import java.util.Map;
 public class Users {
 
     private String URL = "https://pandemic-bit302.000webhostapp.com/login.php";
+    private String URL_REGISTER = "https://pandemic-bit302.000webhostapp.com/register.php";
     private String userID;
     private String userName;
     private String name;
@@ -124,5 +125,39 @@ public class Users {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
         return status;
+    }
+
+    public void register (final Context context , final String userName, final String name, final String email, final String password, String confirmPass) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGISTER,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(context, "Invalid User Name or Password 1", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("userName", userName);
+                params.put("name", name);
+                params.put("email", email);
+                params.put("password", password);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
     }
 }
