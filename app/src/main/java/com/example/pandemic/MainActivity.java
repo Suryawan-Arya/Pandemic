@@ -27,8 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText userNameTxt, passwordTxt;
     private String userName, password;
-    private String URL = "https://pandemic-bit302.000webhostapp.com/login.php";
-
 
     Users users = new Users();
 
@@ -50,20 +48,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Login(View view) {
-        boolean status = false;
         userName = userNameTxt.getText().toString().trim();
         password = passwordTxt.getText().toString().trim();
-        
-        status = users.login(getApplicationContext(), userName, password);
 
-        if (status){
-            System.out.println("True");
-        }else {
-            System.out.println("false");
-        }
-
-
-
+        users.login(getApplicationContext(), userName, password);
 
     }
 }

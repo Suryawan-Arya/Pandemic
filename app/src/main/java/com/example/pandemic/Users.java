@@ -1,6 +1,7 @@
 package com.example.pandemic;
 
 import android.content.Context;
+import android.content.Intent;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -28,7 +29,6 @@ public class Users {
     private String email;
     private String password;
     private Context context;
-    private boolean status = false;
 
     public Users() {
     }
@@ -81,50 +81,62 @@ public class Users {
         this.password = password;
     }
 
-    public boolean login(final Context context, final String userName, final String password){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        System.out.println(response);
-                        try {
+    public void login(final Context context, final String userName, final String password){
+        if (!userName.isEmpty() && !password.isEmpty()){
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
                             System.out.println(response);
-                            JSONObject jsonObject = new JSONObject(response);
-                            String success = jsonObject.getString("success");
-                            JSONArray jsonArray = jsonObject.getJSONArray("login");
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                String success = jsonObject.getString("success");
+                                JSONArray jsonArray = jsonObject.getJSONArray("login");
 
-                            if (success.equals("1")){
-                                //status = true;
-                                for (int i = 0; i < jsonArray.length();i++){
-                                    JSONObject object = jsonArray.getJSONObject(i);
-                                    if (object.get("type").equals("m")){
-                                        Toast.makeText(context, "Login Success, Welcome ", Toast.LENGTH_LONG).show();
+                                if (success.equals("1")){
+                                    for (int i = 0; i < jsonArray.length();i++){
+                                        JSONObject object = jsonArray.getJSONObject(i);
+                                        if (object.get("position").equals("Manager")){
+                                            if (object.get("status").equals("p")){
+                                                Toast.makeText(context, "Login Success, Welcome 2", Toast.LENGTH_LONG).show();
+                                            }else{
+                                                Intent intent = new Intent(context,RegisterTestCenterActivity.class);
+                                                context.startActivity(intent);                                            }
+                                            Toast.makeText(context, "Login Success, Welcome ", Toast.LENGTH_LONG).show();
+                                        }else if(false){
+                                            Toast.makeText(context, "Login Success, Welcome 4", Toast.LENGTH_LONG).show();
+
+                                        }else {
+                                            Toast.makeText(context, "Login Success, Welcome 5", Toast.LENGTH_LONG).show();
+                                        }
                                     }
                                 }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Toast.makeText(context, "Invalid User Name or Password 1", Toast.LENGTH_LONG).show();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Toast.makeText(context, "Invalid User Name or Password 1", Toast.LENGTH_LONG).show();
                         }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, "Invalid User Name or Password 2", Toast.LENGTH_LONG).show();
-                    }
-                }){
-            @Override
-            protected Map<String,String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("userName", userName);
-                params.put("password", password);
-                return params;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(stringRequest);
-        return status;
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(context, "Invalid User Name or Password 2", Toast.LENGTH_LONG).show();
+                        }
+                    }){
+                @Override
+                protected Map<String,String> getParams() throws AuthFailureError {
+                    Map<String,String> params = new HashMap<>();
+                    params.put("userName", userName);
+                    params.put("password", password);
+                    return params;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(context);
+            requestQueue.add(stringRequest);
+        }else{
+            Toast.makeText(context, "User Name and Password can't be empty !!", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     public void register (final Context context , final String userName, final String name, final String email, final String password, String confirmPass) {
