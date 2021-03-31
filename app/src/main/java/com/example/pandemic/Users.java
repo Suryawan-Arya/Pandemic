@@ -30,6 +30,8 @@ public class Users {
     private String password;
     private Context context;
 
+    public static String testManagerID;
+
     public Users() {
     }
 
@@ -97,10 +99,12 @@ public class Users {
                                     for (int i = 0; i < jsonArray.length();i++){
                                         JSONObject object = jsonArray.getJSONObject(i);
                                         if (object.get("position").equals("Manager")){
+                                            testManagerID = object.getString("id");
                                             if (object.get("status").equals("p")){
                                                 Toast.makeText(context, "Login Success, Welcome 2", Toast.LENGTH_LONG).show();
                                             }else{
                                                 Intent intent = new Intent(context,RegisterTestCenterActivity.class);
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 context.startActivity(intent);                                            }
                                             Toast.makeText(context, "Login Success, Welcome ", Toast.LENGTH_LONG).show();
                                         }else if(false){

@@ -9,17 +9,23 @@ import android.widget.EditText;
 public class RegisterTestCenterActivity extends AppCompatActivity {
 
     String testCenterName;
-    EditText testCenterNameTxt;
+    EditText testCenterNameTx;
+
+    TestCenter testCenter = new TestCenter();
+
+    String testManagerID = Users.testManagerID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_test_center);
 
-        testCenterNameTxt.findViewById(R.id.testCenterNameTxt);
+        testCenterNameTx = findViewById(R.id.testCenterNameTxt);
     }
 
     public void RegisterTestCenter(View view) {
+        testCenterName = testCenterNameTx.getText().toString().trim();
 
+        testCenter.registerTestCenter(getApplicationContext(),testCenterName,testManagerID);
     }
 }
