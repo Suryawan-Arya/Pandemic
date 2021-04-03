@@ -31,6 +31,8 @@ public class Users {
     private Context context;
 
     public static String testManagerID;
+    public static String testCenterID;
+
 
     public Users() {
     }
@@ -100,13 +102,20 @@ public class Users {
                                         JSONObject object = jsonArray.getJSONObject(i);
                                         if (object.get("position").equals("Manager")){
                                             testManagerID = object.getString("id");
+                                            testCenterID = object.getString("testCenterID");
                                             if (object.get("status").equals("p")){
-                                                Toast.makeText(context, "Login Success, Welcome 2", Toast.LENGTH_LONG).show();
-                                            }else{
+                                                Intent intent = new Intent(context,ManagerMenuActivity.class);
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                context.startActivity(intent);
+                                            }else if(object.get("status").equals("r")){
                                                 Intent intent = new Intent(context,RegisterTestCenterActivity.class);
                                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                context.startActivity(intent);                                            }
-                                            Toast.makeText(context, "Login Success, Welcome ", Toast.LENGTH_LONG).show();
+                                                context.startActivity(intent);
+                                            }else if (object.get("status").equals("n")){
+                                                Intent intent = new Intent(context,StatusActivity.class);
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                context.startActivity(intent);
+                                            }
                                         }else if(false){
                                             Toast.makeText(context, "Login Success, Welcome 4", Toast.LENGTH_LONG).show();
 
@@ -143,13 +152,18 @@ public class Users {
 
     }
 
-    public void register (final Context context , final String userName, final String name, final String email, final String password, String confirmPass) {
+    public void register (final Context context , final String userName, final String name, final String email, final String password) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGISTER,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
+                            Toast.makeText(context, "Registered Successfully", Toast.LENGTH_LONG).show();
+
+                            Intent intent = new Intent(context,StatusActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            context.startActivity(intent);
 
                         } catch (JSONException e) {
                             e.printStackTrace();

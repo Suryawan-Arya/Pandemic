@@ -12,7 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".RegisterTestCenterActivity"></activity>
+        <activity android:name=".ManageTestKitActivity"></activity>
+        <activity android:name=".RecordTesterActivity" />
+        <activity android:name=".ManagerMenuActivity" />
+        <activity android:name=".StatusActivity" />
+        <activity android:name=".RegisterTestCenterActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

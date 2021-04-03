@@ -52,7 +52,7 @@ public class TestCenter {
                         System.out.println("See the Problems Here -> " + response);
                         try{
                             JSONObject jsonObject = new JSONObject(response);
-
+                            getTestCenter(context, testCenterName);
 
                         }catch (JSONException e){
                             e.printStackTrace();
@@ -78,11 +78,15 @@ public class TestCenter {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
 
+
+    }
+
+    public void getTestCenter(final Context context, final String testCenterName){
         StringRequest stringRequest1 = new StringRequest(Request.Method.GET, URL_GET_TEST_CENTER,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        System.out.println("The Response is Here -> " + response);
+                        System.out.println(response);
                         try{
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray testCenterArray = jsonObject.getJSONArray("testCenter");
@@ -90,6 +94,7 @@ public class TestCenter {
                                 JSONObject testCenterObject = testCenterArray.getJSONObject(i);
                                 if (testCenterObject.get("testCenterName").equals(testCenterName)){
                                     String testCenterId = testCenterObject.getString("ID");
+                                    System.out.println(testCenterId);
                                     updateTestCenterManager(context,testCenterId);
                                 }
                             }
@@ -117,7 +122,7 @@ public class TestCenter {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        System.out.println("The Response is Here -> " + response);
+                        System.out.println("The Response is Here for Update -> " + response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
 

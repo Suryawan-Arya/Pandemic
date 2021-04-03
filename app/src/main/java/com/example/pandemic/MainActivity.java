@@ -53,5 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         users.login(getApplicationContext(), userName, password);
 
+        userNameTxt.setText("");
+        passwordTxt.setText("");
     }
 }
