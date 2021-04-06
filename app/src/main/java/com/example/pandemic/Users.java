@@ -23,6 +23,7 @@ public class Users {
 
     private String URL = "https://pandemic-bit302.000webhostapp.com/login.php";
     private String URL_REGISTER = "https://pandemic-bit302.000webhostapp.com/register.php";
+    private String URL_USER_DATA = "https://pandemic-bit302.000webhostapp.com/userData.php";
     private String userID;
     private String userName;
     private String name;
@@ -154,6 +155,43 @@ public class Users {
         } else {
             Toast.makeText(context, "User Name and Password can't be empty !!", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void registerValidation(final Context context, final String userName, final String name, final String email, final String password){
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_USER_DATA,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        System.out.println("Response ------> " + response);
+                        try{
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONArray userArray = jsonObject.getJSONArray("User");
+                            boolean status = true;
+                            for (int i = 0; i < userArray.length(); i++){
+                                JSONObject userObject = userArray.getJSONObject(i);
+                                if (userObject.get("userName").equals(userName)){
+                                    status = false;
+                                }
+                            }
+                            if (status){
+                                register(context, userName, name, email, password);
+                            }else{
+                                Toast.makeText(context, "User Name Already Exist", Toast.LENGTH_LONG).show();
+                            }
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                            Toast.makeText(context, "Human Error ", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, "Connection Error", Toast.LENGTH_LONG).show();
+                    }
+                });
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
     }
 
     public void register(final Context context, final String userName, final String name, final String email, final String password) {
