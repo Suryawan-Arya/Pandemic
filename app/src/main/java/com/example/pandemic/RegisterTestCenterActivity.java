@@ -26,6 +26,7 @@ public class RegisterTestCenterActivity extends AppCompatActivity {
     public void RegisterTestCenter(View view) {
         testCenterName = testCenterNameTx.getText().toString().trim();
 
-        testCenter.registerTestCenter(getApplicationContext(),testCenterName,testManagerID);
+        //testCenter.registerTestCenter(getApplicationContext(),testCenterName,testManagerID);
+        testCenter.validation(getApplicationContext(),testCenterName,testManagerID);
     }
 }

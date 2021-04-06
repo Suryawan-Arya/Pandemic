@@ -85,8 +85,8 @@ public class Users {
         this.password = password;
     }
 
-    public void login(final Context context, final String userName, final String password){
-        if (!userName.isEmpty() && !password.isEmpty()){
+    public void login(final Context context, final String userName, final String password) {
+        if (!userName.isEmpty() && !password.isEmpty()) {
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
                     new Response.Listener<String>() {
                         @Override
@@ -96,49 +96,54 @@ public class Users {
                                 JSONObject jsonObject = new JSONObject(response);
                                 String success = jsonObject.getString("success");
                                 JSONArray jsonArray = jsonObject.getJSONArray("login");
-
-                                if (success.equals("1")){
-                                    for (int i = 0; i < jsonArray.length();i++){
+                                if (success.equals("1")) {
+                                    for (int i = 0; i < jsonArray.length(); i++) {
                                         JSONObject object = jsonArray.getJSONObject(i);
-                                        if (object.get("position").equals("Manager")){
+                                        if (object.get("position").equals("Manager")) {
                                             testManagerID = object.getString("id");
                                             testCenterID = object.getString("testCenterID");
-                                            if (object.get("status").equals("p")){
-                                                Intent intent = new Intent(context,ManagerMenuActivity.class);
+                                            if (object.get("status").equals("p")) {
+                                                Intent intent = new Intent(context, ManagerMenuActivity.class);
                                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 context.startActivity(intent);
-                                            }else if(object.get("status").equals("r")){
-                                                Intent intent = new Intent(context,RegisterTestCenterActivity.class);
+                                            } else if (object.get("status").equals("r")) {
+                                                Intent intent = new Intent(context, RegisterTestCenterActivity.class);
                                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 context.startActivity(intent);
-                                            }else if (object.get("status").equals("n")){
-                                                Intent intent = new Intent(context,StatusActivity.class);
+                                            } else if (object.get("status").equals("n")) {
+                                                Intent intent = new Intent(context, StatusActivity.class);
                                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 context.startActivity(intent);
                                             }
-                                        }else if(false){
-                                            Toast.makeText(context, "Login Success, Welcome 4", Toast.LENGTH_LONG).show();
+                                        } else if (object.get("position").equals("Tester")) {
+                                            Intent intent = new Intent(context, TesterMenuActivity.class);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            context.startActivity(intent);
+                                            Toast.makeText(context, "Login Success, Welcome", Toast.LENGTH_LONG).show();
 
-                                        }else {
-                                            Toast.makeText(context, "Login Success, Welcome 5", Toast.LENGTH_LONG).show();
+                                        } else if (object.get("position").equals("Patient")) {
+                                            Intent intent = new Intent(context, PatientMenuActivity.class);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            context.startActivity(intent);
+                                            Toast.makeText(context, "Login Success, Welcome", Toast.LENGTH_LONG).show();
                                         }
                                     }
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                Toast.makeText(context, "Invalid User Name or Password 1", Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, "Invalid User Name or Password", Toast.LENGTH_LONG).show();
                             }
                         }
                     },
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(context, "Invalid User Name or Password 2", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Connection Erro", Toast.LENGTH_LONG).show();
                         }
-                    }){
+                    }) {
                 @Override
-                protected Map<String,String> getParams() throws AuthFailureError {
-                    Map<String,String> params = new HashMap<>();
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
                     params.put("userName", userName);
                     params.put("password", password);
                     return params;
@@ -146,13 +151,12 @@ public class Users {
             };
             RequestQueue requestQueue = Volley.newRequestQueue(context);
             requestQueue.add(stringRequest);
-        }else{
+        } else {
             Toast.makeText(context, "User Name and Password can't be empty !!", Toast.LENGTH_LONG).show();
         }
-
     }
 
-    public void register (final Context context , final String userName, final String name, final String email, final String password) {
+    public void register(final Context context, final String userName, final String name, final String email, final String password) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGISTER,
                 new Response.Listener<String>() {
                     @Override
@@ -161,7 +165,7 @@ public class Users {
                             JSONObject jsonObject = new JSONObject(response);
                             Toast.makeText(context, "Registered Successfully", Toast.LENGTH_LONG).show();
 
-                            Intent intent = new Intent(context,StatusActivity.class);
+                            Intent intent = new Intent(context, StatusActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             context.startActivity(intent);
 
