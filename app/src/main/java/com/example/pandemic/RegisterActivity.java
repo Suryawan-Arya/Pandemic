@@ -35,13 +35,8 @@ public class RegisterActivity extends AppCompatActivity {
         password = passwordText.getText().toString().trim();
         confirmPass = confirmPassText.getText().toString().trim();
 
-        if (userName.isEmpty() && name.isEmpty() && email.isEmpty() && password.isEmpty() && confirmPass.isEmpty()){
-            userNameText.setError("Username form cannot be empty");
-            nameText.setError("Name form cannot be empty");
-            emailText.setError("Email form cannot be empty");
-            passwordText.setError("Password form cannot be empty");
-            confirmPassText.setError("Confirm form cannot be empty");
-        }else if (userName.isEmpty()){
+
+        if (userName.isEmpty()){
             userNameText.setError("User Name Can't be Empty");
         }else if (name.isEmpty()){
             nameText.setError("Name Can't be Empty");
@@ -51,6 +46,12 @@ public class RegisterActivity extends AppCompatActivity {
             passwordText.setError("Password Can't be Empty");
         }else if (confirmPass.isEmpty()){
             confirmPassText.setError("Confirm Password Can't be Empty");
+        }else if (userName.isEmpty() && name.isEmpty() && email.isEmpty() && password.isEmpty() && confirmPass.isEmpty()){
+            userNameText.setError("Username form cannot be empty");
+            nameText.setError("Name form cannot be empty");
+            emailText.setError("Email form cannot be empty");
+            passwordText.setError("Password form cannot be empty");
+            confirmPassText.setError("Confirm form cannot be empty");
         }else {
             if (password.equals(confirmPass)){
                 //users.register(getApplicationContext(),userName,name,email,password);

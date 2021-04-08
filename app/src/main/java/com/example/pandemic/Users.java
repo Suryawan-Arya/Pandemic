@@ -25,10 +25,12 @@ public class Users {
     private String URL_REGISTER = "https://pandemic-bit302.000webhostapp.com/register.php";
     private String URL_USER_DATA = "https://pandemic-bit302.000webhostapp.com/userData.php";
     private String userID;
+    private String testCenterId;
     private String userName;
     private String name;
     private String email;
     private String password;
+    private String status;
     private Context context;
 
     public static String testManagerID;
@@ -44,6 +46,32 @@ public class Users {
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+
+    public Users(String userID, String testCenterId, String userName, String name, String email, String password, String status) {
+        this.userID = userID;
+        this.testCenterId = testCenterId;
+        this.userName = userName;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.status = status;
+    }
+
+    public String getTestCenterId() {
+        return testCenterId;
+    }
+
+    public void setTestCenterId(String testCenterId) {
+        this.testCenterId = testCenterId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getUserID() {
@@ -124,6 +152,11 @@ public class Users {
 
                                         } else if (object.get("position").equals("Patient")) {
                                             Intent intent = new Intent(context, PatientMenuActivity.class);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            context.startActivity(intent);
+                                            Toast.makeText(context, "Login Success, Welcome", Toast.LENGTH_LONG).show();
+                                        }else if (object.get("position").equals("Admin")){
+                                            Intent intent = new Intent(context, AdminMenuActivity.class);
                                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                             context.startActivity(intent);
                                             Toast.makeText(context, "Login Success, Welcome", Toast.LENGTH_LONG).show();

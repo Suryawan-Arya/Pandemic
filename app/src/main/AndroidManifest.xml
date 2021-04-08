@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".TesterMenuActivity"></activity>
+        <activity android:name=".ManagerListActivity"></activity>
+        <activity android:name=".TestCenterListActivity" />
+        <activity android:name=".AdminMenuActivity" />
+        <activity android:name=".TesterMenuActivity" />
         <activity android:name=".PatientMenuActivity" />
         <activity android:name=".ManageTestKitActivity" />
         <activity android:name=".RecordTesterActivity" />
