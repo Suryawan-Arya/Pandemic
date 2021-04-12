@@ -96,4 +96,8 @@ public class ManageTestKitActivity extends AppCompatActivity {
     }
 
 
+    public void AddTestKit(View view) {
+        Intent intent = new Intent(getApplicationContext(),AddTestKitActivity.class);
+        startActivity(intent);
+    }
 }

@@ -57,6 +57,7 @@
             android:layout_height="match_parent"
             android:fontFamily="@font/open_sans"
             android:gravity="center"
+            android:onClick="AddTestKit"
             android:text="Add Test Kit"
             android:textColor="#040404"
             android:textSize="30sp"
