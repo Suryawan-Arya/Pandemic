@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".UpdateTestResultActivity"></activity>
+        <activity android:name=".UpdateTestResultActivity" />
         <activity android:name=".FindTestActivity" />
         <activity android:name=".AddTestKitActivity" />
         <activity android:name=".ManagerListActivity" />

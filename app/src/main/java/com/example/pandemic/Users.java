@@ -24,6 +24,7 @@ public class Users {
     private String URL = "https://pandemic-bit302.000webhostapp.com/login.php";
     private String URL_REGISTER = "https://pandemic-bit302.000webhostapp.com/register.php";
     private String URL_USER_DATA = "https://pandemic-bit302.000webhostapp.com/userData.php";
+    private String URL_RECORD_TESTER = "https://pandemic-bit302.000webhost.com/recordTester.php";
     private String userID;
     private String testCenterId;
     private String userName;
@@ -264,5 +265,38 @@ public class Users {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
+    }
+
+    public void recordTester(final Context context, final String userName, final String testCenterID,final String name, final String email, final String password){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_RECORD_TESTER,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            Toast.makeText(context, "Registered Successfully", Toast.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(context, "Invalid User Name or Password 1", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, "Connection Error", Toast.LENGTH_LONG).show();
+                    }
+                }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("userName", userName);
+                params.put("testCenterID", testCenterID);
+                params.put("name", name);
+                params.put("email", email);
+                params.put("password", password);
+                return params;
+            }
+        };
     }
 }
