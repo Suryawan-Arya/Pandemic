@@ -66,10 +66,12 @@ public class ManagerMenuActivity extends AppCompatActivity {
     }
 
     public void RecordTester(View view) {
-
+        Intent intent = new Intent(getApplicationContext(),RecordTesterActivity.class);
+        startActivity(intent);
     }
 
     public void TestRecord(View view) {
+
     }
 
     public void ManageTestKit(View view) {
