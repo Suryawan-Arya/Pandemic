@@ -272,6 +272,7 @@ public class Users {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        System.out.println("==============> " + response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             Toast.makeText(context, "Registered Successfully", Toast.LENGTH_LONG).show();
@@ -298,5 +299,7 @@ public class Users {
                 return params;
             }
         };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
     }
 }
