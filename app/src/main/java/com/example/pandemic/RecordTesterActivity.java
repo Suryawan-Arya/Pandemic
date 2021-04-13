@@ -42,13 +42,11 @@ public class RecordTesterActivity extends AppCompatActivity {
         }else if (confirmPass.isEmpty()){
             testerInputConfirmPassword.setError("Confirm Password Can't be Empty");
         }else if (userName.isEmpty() && name.isEmpty() && email.isEmpty() && password.isEmpty() && confirmPass.isEmpty()){
-
             testerUserNameInput.setError("Username cannot be empty");
             testerNameInput.setError("Name cannot be empty");
             testerInputEmail.setError("Email cannot be empty");
             testerInputPassword.setError("Password cannot be empty");
             testerInputConfirmPassword.setError("Conform Password cannot be empty");
-
         }else {
             if (password.equals(confirmPass)){
                 users.recordTester(getApplicationContext(),userName,testCenterId,name,email,password);

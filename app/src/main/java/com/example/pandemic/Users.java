@@ -24,7 +24,7 @@ public class Users {
     private String URL = "https://pandemic-bit302.000webhostapp.com/login.php";
     private String URL_REGISTER = "https://pandemic-bit302.000webhostapp.com/register.php";
     private String URL_USER_DATA = "https://pandemic-bit302.000webhostapp.com/userData.php";
-    private String URL_RECORD_TESTER = "https://pandemic-bit302.000webhost.com/recordTester.php";
+    private String URL_RECORD_TESTER = "https://pandemic-bit302.000webhostapp.com/recordTester.php";
     private String userID;
     private String testCenterId;
     private String userName;
@@ -278,7 +278,7 @@ public class Users {
                             Toast.makeText(context, "Registered Successfully", Toast.LENGTH_LONG).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(context, "Invalid User Name or Password 1", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Error", Toast.LENGTH_LONG).show();
                         }
                     }
                 },
