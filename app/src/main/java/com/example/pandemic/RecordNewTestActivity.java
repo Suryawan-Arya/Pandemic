@@ -4,14 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class RecordNewTestActivity extends AppCompatActivity {
    private EditText userNameInput, nameInput, passwordInput, confirmPasswordInput, symptompsInput;
-   private String userName, name, password, confirmPassword, symptoms;
+   private String userName, name, patientType,password, confirmPassword, symptoms;
    private Spinner patientTypeSp;
    private ArrayList<String> patientTypeArray = new ArrayList<>();
    private Users users = new Users();
@@ -26,6 +29,29 @@ public class RecordNewTestActivity extends AppCompatActivity {
       passwordInput  = findViewById(R.id.passwordInput);
       confirmPasswordInput = findViewById(R.id.confirmPasswordInput);
       symptompsInput = findViewById(R.id.symptompsInput);
+
+      patientTypeArray.add("-");
+      patientTypeArray.add("Returnee");
+      patientTypeArray.add("Quarantined");
+      patientTypeArray.add("Close Contact");
+      patientTypeArray.add("Infected");
+      patientTypeArray.add("Suspected");
+
+      ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, patientTypeArray);
+      arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+      patientTypeSp.setAdapter(arrayAdapter);
+
+      patientTypeSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+         @Override
+         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            patientType = parent.getItemAtPosition(position).toString();
+         }
+
+         @Override
+         public void onNothingSelected(AdapterView<?> parent) {
+
+         }
+      });
    }
 
    public void AddNewTest(View view) {
@@ -39,6 +65,8 @@ public class RecordNewTestActivity extends AppCompatActivity {
          userNameInput.setError("User Name Can't be Empty");
       }else if (name.isEmpty()){
          nameInput.setError("Name Can't be Empty");
+      }else if(patientType.isEmpty()){
+         Toast.makeText(getApplicationContext(), "Select Patient Type First!!", Toast.LENGTH_LONG).show();
       }else if (password.isEmpty()){
          passwordInput.setError("Password Can't be Empty");
       }else if (confirmPassword.isEmpty()){
