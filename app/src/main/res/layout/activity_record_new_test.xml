@@ -25,7 +25,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
@@ -35,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView54"
-        app:layout_constraintVertical_bias="0.469" >
+        app:layout_constraintVertical_bias="0.469">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,7 +61,7 @@
                 android:hint="User Name">
 
                 <EditText
-                    android:id="@+id/editText"
+                    android:id="@+id/userNameInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -85,7 +85,7 @@
                 android:hint="Name">
 
                 <EditText
-                    android:id="@+id/editText2"
+                    android:id="@+id/nameInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/editText4"
+                    android:id="@+id/passwordInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -129,7 +129,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/editText5"
+                    android:id="@+id/confirmPasswordInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -148,7 +148,7 @@
                 android:textColor="#7ABA3A" />
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/patientTypeSp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -163,21 +163,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/editText6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:fontFamily="@font/open_sans"
-                    android:hint="Symptoms"
-                    android:inputType="textPersonName"
-                    android:textSize="20sp" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <EditText
+                android:id="@+id/symptompsInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:fontFamily="@font/open_sans"
+                android:hint="Symptoms"
+                android:inputType="textPersonName"
+                android:paddingBottom="20dp"
+                android:textSize="20sp" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:onClick="AddNewTest"
                 app:cardBackgroundColor="#BDF9F7"
                 app:cardCornerRadius="20dp">
 
