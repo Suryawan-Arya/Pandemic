@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class Test {
 
-   private String testID, testCenterID, userID, testDate, result, resultDate, testStatus;
+   private String testID, testCenterID, userID, patientName, testDate, result, resultDate, testStatus;
    private String URL_UPDATE_TEST_DATA = "https://pandemic-bit302.000webhostapp.com/updateTestData.php";
    private String URL_TEST_DATA = "https://pandemic-bit302.000webhostapp.com/testData.php";
    public static String resultID;
@@ -29,14 +29,23 @@ public class Test {
    public Test() {
    }
 
-   public Test(String testID, String testCenterID, String userID, String testDate, String result, String resultDate, String testStatus) {
+   public Test(String testID, String testCenterID, String userID,String patientName , String testDate, String result, String resultDate, String testStatus) {
       this.testID = testID;
       this.testCenterID = testCenterID;
       this.userID = userID;
+      this.patientName = patientName;
       this.testDate = testDate;
       this.result = result;
       this.resultDate = resultDate;
       this.testStatus = testStatus;
+   }
+
+   public String getPatientName() {
+      return patientName;
+   }
+
+   public void setPatientName(String patientName) {
+      this.patientName = patientName;
    }
 
    public String getTestID() {

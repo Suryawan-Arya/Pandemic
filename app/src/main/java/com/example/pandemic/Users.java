@@ -146,12 +146,16 @@ public class Users {
                                                 context.startActivity(intent);
                                             }
                                         } else if (object.get("position").equals("Tester")) {
+                                            testManagerID = object.getString("id");
+                                            testCenterID = object.getString("testCenterID");
                                             Intent intent = new Intent(context, TesterMenuActivity.class);
                                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                             context.startActivity(intent);
                                             Toast.makeText(context, "Login Success, Welcome", Toast.LENGTH_LONG).show();
 
                                         } else if (object.get("position").equals("Patient")) {
+                                            testManagerID = object.getString("id");
+                                            testCenterID = object.getString("testCenterID");
                                             Intent intent = new Intent(context, PatientMenuActivity.class);
                                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                             context.startActivity(intent);
