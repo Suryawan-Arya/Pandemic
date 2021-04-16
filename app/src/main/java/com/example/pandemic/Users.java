@@ -25,6 +25,8 @@ public class Users {
     private String URL_REGISTER = "https://pandemic-bit302.000webhostapp.com/register.php";
     private String URL_USER_DATA = "https://pandemic-bit302.000webhostapp.com/userData.php";
     private String URL_RECORD_TESTER = "https://pandemic-bit302.000webhostapp.com/recordTester.php";
+    private String URL_RECORD_NEW_TEST = "https://pandemic-bit302.000webhostapp.com/addPatient.php";
+    private String URL_INPUT_TEST = "https://pandemic-bit302.000webhostapp.com/recordTest.php";
     private String userID;
     private String testCenterId;
     private String userName;
@@ -203,7 +205,7 @@ public class Users {
                         System.out.println("Response ------> " + response);
                         try{
                             JSONObject jsonObject = new JSONObject(response);
-                            JSONArray userArray = jsonObject.getJSONArray("User");
+                            JSONArray userArray = jsonObject.getJSONArray("users");
                             boolean status = true;
                             for (int i = 0; i < userArray.length(); i++){
                                 JSONObject userObject = userArray.getJSONObject(i);
@@ -300,6 +302,115 @@ public class Users {
                 params.put("name", name);
                 params.put("email", email);
                 params.put("password", password);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
+    public void recordNewTest(final Context context, final String userName, final String testCenterID, final String name, final String symptoms, final String patientType, final String password, final String createdDate){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_RECORD_NEW_TEST,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        System.out.println("Record New Test ==============> " + response);
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            userData(context,userName, testCenterID, createdDate);
+
+                            Toast.makeText(context, "Registered Successfully", Toast.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(context, "Error", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, "Connection Error", Toast.LENGTH_LONG).show();
+                    }
+                }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("userName", userName);
+                params.put("testCenterID", testCenterID);
+                params.put("name", name);
+                params.put("symptoms", symptoms);
+                params.put("patientType", patientType);
+                params.put("password", password);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
+    public void userData(final Context context, final String userName, final String testCenterID, final String createdDate){
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_USER_DATA,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        System.out.println("Response User Data ------> " + response);
+                        try{
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONArray userArray = jsonObject.getJSONArray("users");
+                            for (int i = 0; i < userArray.length(); i++){
+                                JSONObject userObject = userArray.getJSONObject(i);
+                                if (userObject.get("userName").equals(userName)){
+                                    inputTest(context, userObject.getString("id"),testCenterID,createdDate);
+                                }
+                            }
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                            Toast.makeText(context, "Human Error ", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, "Connection Error", Toast.LENGTH_LONG).show();
+                    }
+                });
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
+    public void inputTest(final Context context, final String userID, final String testCenterID, final String createdDate){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_INPUT_TEST,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        System.out.println("User ID ==============> " + userID);
+                        System.out.println("Test Center ID ==============> " + testCenterID);
+                        System.out.println("Input Test ==============> " + response);
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            Intent intent = new Intent(context, RecordTestMenuActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            context.startActivity(intent);
+                            Toast.makeText(context, "Registered Successfully", Toast.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(context, "Error", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, "Connection Error", Toast.LENGTH_LONG).show();
+                    }
+                }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("userID", userID);
+                params.put("testCenterID", testCenterID);
+                params.put("createdDate", createdDate);
                 return params;
             }
         };

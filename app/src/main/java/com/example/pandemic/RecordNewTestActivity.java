@@ -10,13 +10,16 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class RecordNewTestActivity extends AppCompatActivity {
    private EditText userNameInput, nameInput, passwordInput, confirmPasswordInput, symptompsInput;
-   private String userName, name, patientType,password, confirmPassword, symptoms;
+   private String userName, name, patientType, testDate, password, confirmPassword, symptoms;
    private Spinner patientTypeSp;
    private ArrayList<String> patientTypeArray = new ArrayList<>();
+   private String testCenterID = Users.testCenterID;
    private Users users = new Users();
 
    @Override
@@ -29,24 +32,29 @@ public class RecordNewTestActivity extends AppCompatActivity {
       passwordInput  = findViewById(R.id.passwordInput);
       confirmPasswordInput = findViewById(R.id.confirmPasswordInput);
       symptompsInput = findViewById(R.id.symptompsInput);
+      patientTypeSp = findViewById(R.id.patientTypeSp);
 
       patientTypeArray.add("-");
       patientTypeArray.add("Returnee");
-      patientTypeArray.add("Quarantined");
+      patientTypeArray.add("Quarantine");
       patientTypeArray.add("Close Contact");
       patientTypeArray.add("Infected");
       patientTypeArray.add("Suspected");
 
-      ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, patientTypeArray);
+      ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,patientTypeArray);
       arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
       patientTypeSp.setAdapter(arrayAdapter);
+
+      SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+      String date = simpleDateFormat.format(Calendar.getInstance().getTime());
+      testDate = date;
+
 
       patientTypeSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
          @Override
          public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             patientType = parent.getItemAtPosition(position).toString();
          }
-
          @Override
          public void onNothingSelected(AdapterView<?> parent) {
 
@@ -81,7 +89,7 @@ public class RecordNewTestActivity extends AppCompatActivity {
          symptompsInput.setError("Symptoms cannot be empty");
       }else {
          if (password.equals(confirmPassword)){
-            //users.recordnewTest(getApplicationContext(),userName,testCenterId,name,email,password);
+            users.recordNewTest(getApplicationContext(),userName,testCenterID,name,symptoms,patientType,password,testDate);
          }else{
             confirmPasswordInput.setError("Password does not match");
          }
