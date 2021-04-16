@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -79,4 +81,8 @@ public class RecordTestMenuActivity extends AppCompatActivity {
       requestQueue.add(stringRequest);
    }
 
+    public void RecordNewTest(View view) {
+       Intent intent = new Intent(getApplicationContext(), RecordNewTestActivity.class);
+       startActivity(intent);
+    }
 }
