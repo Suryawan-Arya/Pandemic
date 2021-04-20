@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingTop="10dp"
+    android:paddingRight="20dp"
+    android:paddingBottom="10dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/testCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="20dp">
+        app:cardBackgroundColor="#FFFF">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
-            android:paddingRight="20dp"
-            android:paddingBottom="10dp">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/patientNameTextView"
@@ -27,6 +27,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center_vertical"
+                android:paddingLeft="10dp"
                 android:text="TextView"
                 android:textColor="#040404"
                 android:textSize="30sp" />
@@ -53,7 +54,10 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/open_sans"
                     android:gravity="center"
+                    android:paddingLeft="5dp"
                     android:paddingTop="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
                     android:text="DD/MM/YY"
                     android:textColor="#040404"
                     android:textSize="25sp" />
@@ -61,4 +65,11 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#cfcfc4" />
+
 </LinearLayout>

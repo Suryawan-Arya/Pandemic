@@ -33,6 +33,7 @@ public class FindTestActivity extends AppCompatActivity {
       setContentView(R.layout.activity_find_test);
 
       testIdInput = findViewById(R.id.testIdInput);
+
    }
 
 //   public void findTestResult(final String testID){
