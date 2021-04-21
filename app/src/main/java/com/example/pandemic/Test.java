@@ -24,6 +24,7 @@ public class Test {
    private String testID, testCenterID, userID, patientName, testDate, result, resultDate, testStatus;
    private String URL_UPDATE_TEST_DATA = "https://pandemic-bit302.000webhostapp.com/updateTestData.php";
    private String URL_TEST_DATA = "https://pandemic-bit302.000webhostapp.com/testData.php";
+   private String URL_UPDATE_TEST = "https://pandemic-bit302.000webhostapp.com/updateTest.php";
    public static String resultID;
 
    public Test() {
@@ -172,5 +173,46 @@ public class Test {
       };
       RequestQueue requestQueue = Volley.newRequestQueue(context);
       requestQueue.add(stringRequest);
+   }
+
+   public void updateTest (final Context context, final String userID, final String patientType, final String symptoms){
+      StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPDATE_TEST,
+              new Response.Listener<String>() {
+                 @Override
+                 public void onResponse(String response) {
+                     System.out.println("Update Text Response =============>"+ response);
+                     try {
+                        JSONObject jsonObject= new JSONObject(response);
+                        Toast.makeText(context, "Update Success", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(context,RecordTestMenuActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
+                     }
+                     catch (JSONException e){
+                        e.printStackTrace();
+                        Toast.makeText(context,   "Update Fail", Toast.LENGTH_LONG).show();
+
+                     }
+                 }
+
+              },
+              new Response.ErrorListener() {
+                 @Override
+                 public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context,  "Connection Error", Toast.LENGTH_LONG).show();
+                 }
+              }){
+         @Override
+         protected  Map<String, String> getParams() throws AuthFailureError{
+            Map<String, String> params = new HashMap<>();
+            params.put("id", userID);
+            params.put("patientType",patientType);
+            params.put("symptoms", symptoms);
+            return params;
+
+         }
+      };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
    }
 }

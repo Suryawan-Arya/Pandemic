@@ -59,7 +59,7 @@ public class TestListAdapter extends RecyclerView.Adapter<TestListAdapter.ViewHo
         holder.testCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,TesterMenuActivity.class);
+                Intent intent = new Intent(context,UpdateTestActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
