@@ -27,6 +27,7 @@ public class RecordTestMenuActivity extends AppCompatActivity {
    RecyclerView.LayoutManager layoutManager;
    private String testCenterId = Users.testCenterID;
    private ArrayList<Test> testArray = new ArrayList<>();
+   public static String patientID;
 
    private String TEST_DATA_URL = "https://pandemic-bit302.000webhostapp.com/testData.php";
    @Override
@@ -61,6 +62,7 @@ public class RecordTestMenuActivity extends AppCompatActivity {
                                      testObj.getString("result"),
                                      testObj.getString("resultDate"),
                                      testObj.getString("testStatus")));
+                             patientID = testObj.getString("userID");
                           }
                        }
                        TestListAdapter testListAdapter = new TestListAdapter(getApplicationContext(),testArray);

@@ -18,6 +18,9 @@ public class UpdateTestActivity extends AppCompatActivity {
    private String name,patientType,symptoms;
    private Spinner patientTypeSpinner;
    private ArrayList<String> patientTypeArray = new ArrayList<>();
+   private  Test test = new Test();
+   private String patientID = RecordTestMenuActivity.patientID;
+
 
 
 
@@ -35,7 +38,7 @@ public class UpdateTestActivity extends AppCompatActivity {
       patientTypeArray.add("Suspected");
 
       patientNameTextView  = findViewById(R.id.patientNameTextView);
-      symptopmsInputEditText = findViewById(R.id.symptompsInput);
+      symptopmsInputEditText = findViewById(R.id.symptomsInputEditText);
       patientTypeSpinner = findViewById(R.id.patientTypeSpinner);
 
       ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,patientTypeArray);
@@ -59,6 +62,7 @@ public class UpdateTestActivity extends AppCompatActivity {
 
 
    public void UpdateTest(View view){
-
+      symptoms = symptopmsInputEditText.getText().toString();
+      test.updateTest(getApplicationContext(),patientID,patientType,symptoms);
    }
 }
