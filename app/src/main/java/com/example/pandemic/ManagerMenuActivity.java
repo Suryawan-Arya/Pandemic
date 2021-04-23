@@ -71,7 +71,8 @@ public class ManagerMenuActivity extends AppCompatActivity {
     }
 
     public void TestRecord(View view) {
-
+        Intent intent = new Intent(getApplicationContext(),TestDetailActivity.class);
+        startActivity(intent);
     }
 
     public void ManageTestKit(View view) {

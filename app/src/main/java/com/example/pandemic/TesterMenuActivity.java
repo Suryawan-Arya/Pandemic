@@ -23,4 +23,9 @@ public class TesterMenuActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(),RecordTestMenuActivity.class);
         startActivity(intent);
     }
+
+   public void TestReport(View view) {
+      Intent intent = new Intent(getApplicationContext(),TestDetailActivity.class);
+      startActivity(intent);
+   }
 }

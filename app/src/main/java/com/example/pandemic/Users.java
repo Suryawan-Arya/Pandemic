@@ -38,6 +38,7 @@ public class Users {
 
     public static String testManagerID;
     public static String testCenterID;
+    public static String userType;
 
 
     public Users() {
@@ -134,6 +135,7 @@ public class Users {
                                         if (object.get("position").equals("Manager")) {
                                             testManagerID = object.getString("id");
                                             testCenterID = object.getString("testCenterID");
+                                            userType = "Manager";
                                             if (object.get("status").equals("p")) {
                                                 Intent intent = new Intent(context, ManagerMenuActivity.class);
                                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -148,6 +150,7 @@ public class Users {
                                                 context.startActivity(intent);
                                             }
                                         } else if (object.get("position").equals("Tester")) {
+                                            userType = "Tester";
                                             testManagerID = object.getString("id");
                                             testCenterID = object.getString("testCenterID");
                                             Intent intent = new Intent(context, TesterMenuActivity.class);
@@ -156,6 +159,7 @@ public class Users {
                                             Toast.makeText(context, "Login Success, Welcome", Toast.LENGTH_LONG).show();
 
                                         } else if (object.get("position").equals("Patient")) {
+                                            userType = "Patient";
                                             testManagerID = object.getString("id");
                                             testCenterID = object.getString("testCenterID");
                                             Intent intent = new Intent(context, PatientMenuActivity.class);

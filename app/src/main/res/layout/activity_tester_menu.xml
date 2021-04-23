@@ -38,6 +38,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
+                android:onClick="TestReport"
                 app:cardBackgroundColor="#BDF9F7"
                 app:cardCornerRadius="20dp" >
 
