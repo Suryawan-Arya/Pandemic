@@ -40,7 +40,7 @@
                 android:layout_height="90dp"
                 android:onClick="TestReport"
                 app:cardBackgroundColor="#BDF9F7"
-                app:cardCornerRadius="20dp" >
+                app:cardCornerRadius="20dp">
 
                 <TextView
                     android:id="@+id/textView27"
