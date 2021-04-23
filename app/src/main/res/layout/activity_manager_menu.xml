@@ -48,7 +48,7 @@
                     android:fontFamily="@font/open_sans"
                     android:gravity="center"
                     android:onClick="TestRecord"
-                    android:text="Generate Test Record"
+                    android:text="Generate Test Report"
                     android:textColor="#040404"
                     android:textSize="30sp" />
             </androidx.cardview.widget.CardView>

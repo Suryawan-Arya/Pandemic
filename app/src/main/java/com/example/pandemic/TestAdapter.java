@@ -1,6 +1,7 @@
 package com.example.pandemic;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,10 +44,11 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
       holder.patientTest.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View v) {
-
+            Intent intent = new Intent(context,TestDetailActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
          }
       });
-
    }
 
    @Override

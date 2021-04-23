@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".TestReportActivity"></activity>
+        <activity android:name=".TestDetailActivity"></activity>
         <activity android:name=".RecordNewTestActivity" />
         <activity android:name=".UpdateTestActivity" />
         <activity android:name=".RecordTestMenuActivity" />
