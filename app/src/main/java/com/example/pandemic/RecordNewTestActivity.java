@@ -88,10 +88,14 @@ public class RecordNewTestActivity extends AppCompatActivity {
          passwordInput.setError("Confirm Password cannot be empty");
          symptompsInput.setError("Symptoms cannot be empty");
       }else {
-         if (password.equals(confirmPassword)){
-            users.recordNewTest(getApplicationContext(),userName,testCenterID,name,symptoms,patientType,password,testDate);
+         if (patientType.equals("-")){
+            if (password.equals(confirmPassword)){
+               users.recordNewTest(getApplicationContext(),userName,testCenterID,name,symptoms,patientType,password,testDate);
+            }else{
+               confirmPasswordInput.setError("Password does not match");
+            }
          }else{
-            confirmPasswordInput.setError("Password does not match");
+            Toast.makeText(getApplicationContext(), "Select Patient Type !!!! ", Toast.LENGTH_LONG).show();
          }
       }
    }
