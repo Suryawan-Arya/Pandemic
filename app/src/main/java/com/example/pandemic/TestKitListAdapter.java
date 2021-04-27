@@ -62,6 +62,8 @@ public class TestKitListAdapter extends RecyclerView.Adapter<TestKitListAdapter.
         holder.testKitNameTv.setText(TestKit.get(position).getTestKitName());
         holder.testKitAmountTv.setText(TestKit.get(position).getStock());
         holder.amount = parseInt(TestKit.get(position).getStock());
+        holder.upBtn.setImageResource(R.drawable.up);
+        holder.downBtn.setImageResource(R.drawable.down);
         holder.upBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,6 +112,7 @@ public class TestKitListAdapter extends RecyclerView.Adapter<TestKitListAdapter.
                         @Override
                         public void onResponse(String response) {
                             System.out.println("Respose Here ------------> " + response);
+                            Toast.makeText(context, "Test Kit Stock Updated", Toast.LENGTH_LONG).show();
                             try{
                                 JSONObject jsonObject = new JSONObject(response);
                             }catch (JSONException e){

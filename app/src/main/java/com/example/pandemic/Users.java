@@ -285,6 +285,9 @@ public class Users {
                         System.out.println("==============> " + response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
+                            Intent intent = new Intent(context,ManagerMenuActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            context.startActivity(intent);
                             Toast.makeText(context, "Registered Successfully", Toast.LENGTH_LONG).show();
                         } catch (JSONException e) {
                             e.printStackTrace();

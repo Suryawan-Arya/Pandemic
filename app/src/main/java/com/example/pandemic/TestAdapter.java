@@ -17,6 +17,7 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
 
    Context context;
    ArrayList<Test> testArray = new ArrayList<>();
+   public static String testID;
 
    public TestAdapter() {
    }
@@ -37,13 +38,14 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
    }
 
    @Override
-   public void onBindViewHolder(@NonNull TestAdapter.ViewHolder holder, int position) {
+   public void onBindViewHolder(@NonNull TestAdapter.ViewHolder holder, final int position) {
       holder.patientNameTv.setText(testArray.get(position).getPatientName());
       holder.recordedDateTv.setText(testArray.get(position).getTestDate());
       holder.resultDateTv.setText(testArray.get(position).getResultDate());
       holder.patientTest.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View v) {
+            testID = testArray.get(position).getTestID();
             Intent intent = new Intent(context,TestDetailActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);

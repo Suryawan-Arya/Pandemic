@@ -114,7 +114,7 @@ public class UpdateTestResultActivity extends AppCompatActivity {
       if (!result.isEmpty()){
          test.updateData(getApplicationContext(), testID, result, today);
       }else {
-         resultInput.setError("Test Kit Name Can't be Empty!!");
+         resultInput.setError("Result Can't be Empty!!");
       }
    }
 }

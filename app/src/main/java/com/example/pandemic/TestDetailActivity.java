@@ -26,10 +26,10 @@ public class TestDetailActivity extends AppCompatActivity {
 
    private String URL_TEST_DATA = "https://pandemic-bit302.000webhostapp.com/testData.php";
    private TextView testIDTv, patientNameTv, symptomTv, patientTypeTv, statusTv, resultTv, testDateTv, resultDateTv;
-   private String testID, patientName, symptom, patientType, status, result, testDate, resultDate;
    private String userType = Users.userType;
    private String userID = Users.testManagerID;
    private String testCenterID = Users.testCenterID;
+   private String testID = TestAdapter.testID;
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +60,7 @@ public class TestDetailActivity extends AppCompatActivity {
                        for (int i = 0; i < testResultArray.length(); i++){
                           JSONObject testResultObj = testResultArray.getJSONObject(i);
                           if(userType.equals("Tester") || userType.equals("Manager")){
-                             if (testResultObj.getString("testCenterID").equals(testCenterID)){
+                             if (testResultObj.getString("testCenterID").equals(testCenterID) && testResultObj.getString("resultID").equals(testID)){
                                 testIDTv.setText(testResultObj.getString("resultID"));
                                 patientNameTv.setText(testResultObj.getString("name"));
                                 symptomTv.setText(testResultObj.getString("symptoms"));
@@ -101,7 +101,7 @@ public class TestDetailActivity extends AppCompatActivity {
 
    public void Back(View view) {
       if (userType.equals("Tester") || userType.equals("Manager")){
-         Intent intent = new Intent(getApplicationContext(),TesterMenuActivity.class);
+         Intent intent = new Intent(getApplicationContext(),TestReportActivity.class);
          startActivity(intent);
       }else {
          Intent intent = new Intent(getApplicationContext(),PatientMenuActivity.class);
